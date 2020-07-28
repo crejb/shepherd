@@ -16,7 +16,7 @@ enum SafetyStatus {
   NonShepherdCommits,
 }
 
-class GithubAdapter extends GitAdapter {
+class BitbucketAdapter extends GitAdapter {
   private octokit: Octokit;
 
   /**
@@ -346,4 +346,4 @@ class GithubAdapter extends GitAdapter {
   }
 }
 
-export default GithubAdapter;
+export default BitbucketAdapter;
