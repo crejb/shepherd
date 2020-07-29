@@ -1,7 +1,9 @@
 import { ChildProcessPromise, spawn } from 'child-process-promise';
 import { ChildProcess } from 'child_process';
+import stringArgv from 'string-argv';
 import { IRepo } from '../adapters/base';
 import { IMigrationContext } from '../migration-context';
+
 
 interface IExecRepoResult {
   promise: ChildProcessPromise;
@@ -32,7 +34,8 @@ export default async (
     shell: true,
     capture: [ 'stdout', 'stderr' ],
   };
-  const promise = spawn(command, [], execOptions) as ChildProcessPromise;
+  const commandArgs = stringArgv(command);
+  const promise = spawn(commandArgs[0], commandArgs.slice(1), execOptions) as ChildProcessPromise;
   return {
     promise,
     childProcess: promise.childProcess,
